@@ -19,6 +19,16 @@
       stroke: #ff0000;
       stroke-width: 4px;
     }
+
+    &.explored {
+      stroke: #aaaaff;
+      stroke-width: 4px;
+    }
+
+    &.visited {
+      stroke: #0000ff;
+      stroke-width: 4px;
+    }
   }
 
   .node-path {
@@ -26,8 +36,9 @@
     stroke-width: 3px;
     transition: all 0.3s;
 
-    &.plus-path {
-      stroke: red;
+    &.visited {
+      stroke: #0000ff;
+      stroke-width: 4px;
     }
   }
 }
@@ -46,7 +57,7 @@
     padding: 10px;
     border-radius: 5px;
     border: none;
-    color: white;
+    color: black;
     font-size: 1rem;
     cursor: pointer;
     transition: 0.2s;
@@ -82,5 +93,30 @@
     font-size: 1rem;
     cursor: text;
     transition: 0.2s;
+  }
+}
+
+#traversal-result {
+  position: absolute;
+  top: 50px;
+  right: 100px;
+  max-width: 40px;
+  min-height: 30px;
+  border: 3px solid #0000ff;
+  color: #0000ff;
+  padding: 10px;
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+  font: 700 2rem "Roboto";
+
+  &::before {
+    content: "Traversal Result:";
+    font: 700 2rem "Roboto";
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: #000000;
   }
 }
