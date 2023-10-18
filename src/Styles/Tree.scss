@@ -2,7 +2,7 @@
   display: flex;
   min-width: 100vw;
   min-height: 100vh;
-  background-color: #3a3a3a;
+  background-color: #dadada;
 
   .node-base {
     stroke: black;
@@ -25,6 +25,10 @@
     stroke: #00dd00;
     stroke-width: 3px;
     transition: all 0.3s;
+
+    &.plus-path {
+      stroke: red;
+    }
   }
 }
 
@@ -42,9 +46,8 @@
     padding: 10px;
     border-radius: 5px;
     border: none;
-    background-color: #3a3a3a;
     color: white;
-    font-size: 20px;
+    font-size: 1rem;
     cursor: pointer;
     transition: 0.2s;
 
@@ -58,7 +61,7 @@
       }
     }
 
-    &#edit-node-btn {
+    &#change-value-btn {
       background-color: #00dd00;
       box-shadow: 0 0 5px #00dd00;
 
@@ -67,5 +70,17 @@
         box-shadow: 0 0 5px #00aa00;
       }
     }
+  }
+
+  input#edit-node {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 150px;
+    background-color: white;
+    color: black;
+    font-size: 1rem;
+    cursor: text;
+    transition: 0.2s;
   }
 }

@@ -2,7 +2,7 @@
   display: flex;
   min-width: 100vw;
   min-height: 100vh;
-  background-color: #3a3a3a;
+  background-color: #dadada;
 }
 #tree .node-base {
   stroke: black;
@@ -23,6 +23,9 @@
   stroke-width: 3px;
   transition: all 0.3s;
 }
+#tree .node-path.plus-path {
+  stroke: red;
+}
 
 .tree-taskbar {
   position: absolute;
@@ -38,9 +41,8 @@
   padding: 10px;
   border-radius: 5px;
   border: none;
-  background-color: #3a3a3a;
   color: white;
-  font-size: 20px;
+  font-size: 1rem;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -52,11 +54,22 @@
   background-color: #aa0000;
   box-shadow: 0 0 5px #aa0000;
 }
-.tree-taskbar button#edit-node-btn {
+.tree-taskbar button#change-value-btn {
   background-color: #00dd00;
   box-shadow: 0 0 5px #00dd00;
 }
-.tree-taskbar button#edit-node-btn:hover {
+.tree-taskbar button#change-value-btn:hover {
   background-color: #00aa00;
   box-shadow: 0 0 5px #00aa00;
+}
+.tree-taskbar input#edit-node {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  width: 150px;
+  background-color: white;
+  color: black;
+  font-size: 1rem;
+  cursor: text;
+  transition: 0.2s;
 }/*# sourceMappingURL=Tree.css.map */

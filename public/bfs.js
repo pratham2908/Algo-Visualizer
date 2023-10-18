@@ -51,28 +51,47 @@ class Tree {
 let nodes = [];
 let position = [];
 const deleteNodeBtn = document.getElementById("delete-node-btn");
+const editNodeInput = document.getElementById("edit-node");
+const changeValueBtn = document.getElementById("change-value-btn");
 let selectedNode = null;
-deleteNodeBtn.addEventListener("click", () => {
-    deleteNode(selectedNode);
-    handleNodeSelect();
-    reStructure();
-});
+let container = document.getElementById("tree");
+let treeParent = document.getElementById("tree-parent");
+let tree = new Tree();
 let treeData = {
     x: window.innerWidth / 2,
     y: 100,
     scale: 1,
     nodeRadius: 30,
+    currNodeValue: 1,
 }
 let dragData = {
     isDown: false,
     startX: 0,
     startY: 0,
 }
-let container = document.getElementById("tree");
-let treeParent = document.getElementById("tree-parent");
-let tree = new Tree();
-let arr = [5, 15, 1, 7, 8, 4, 6, 3, 9, 10, 17, 18, -2, -5, -4, -10, -15, 20, -21, 21, -14];
-for (let i of arr) tree.insert(i);
+tree.insert(0);
+
+
+changeValueBtn.addEventListener("click", () => {
+    if (selectedNode == null) {
+        alert("Select any node first");
+        return;
+    }
+    let value = editNodeInput.value;
+    if (value == "") {
+        alert("enter valid value");
+        return;
+    }
+    selectedNode.value = value;
+    selectedNode.nodeBase.children[1].innerHTML = value;
+    handleNodeSelect();
+    reStructure();
+});
+deleteNodeBtn.addEventListener("click", () => {
+    deleteNode(selectedNode);
+    handleNodeSelect();
+    reStructure();
+});
 
 changeTreePosition();
 function changeTreePosition() {
@@ -87,6 +106,8 @@ function createNewNode(level, currValue, parentNode, currNode, direction = null)
     treeParent.appendChild(group);
     currNode.index = parentNode == null ? 0 : parentNode.index * 2 + (direction == "left" ? 0 : 1);
     nodes[level][currNode.index] = currNode;
+    if (direction == "left") parentNode.left = currNode;
+    else if (direction == "right") parentNode.right = currNode;
 
     let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path.classList.add("node-path");
@@ -113,6 +134,7 @@ function createNewNode(level, currValue, parentNode, currNode, direction = null)
     text.innerHTML = currValue;
     group.appendChild(text);
     reStructure();
+    return currNode;
 }
 
 function createGroup() {
@@ -122,22 +144,56 @@ function createGroup() {
         group.style.cursor = "pointer";
     });
     group.addEventListener("click", () => {
-        nodes.forEach(level => {
-            level.forEach(node => {
-                if (node != null) {
-                    node.nodeBase.classList.remove("selected");
-                }
-
-
-            })
-        })
-        group.classList.add("selected");
-        handleNodeSelect();
+        handleNodeSelect(group);
     });
     return group;
 }
 
-function handleNodeSelect() {
+function handleNodeSelect(group = null) {
+    if (!(group != null && group.children[1].innerHTML == "+")) {
+        let node = giveSelectedNode(group);
+        if (node == null) return;
+        let left = node.level == nodes.length - 1 ? null : nodes[node.level + 1][node.index * 2];
+        let right = node.level == nodes.length - 1 ? null : nodes[node.level + 1][node.index * 2 + 1];
+
+
+        if (left == null) {
+            createPlus(node.level + 1, node, "left")
+        }
+        if (right == null) {
+            createPlus(node.level + 1, node, "right")
+        }
+    } else {
+        if (group == null) {
+            selectedNode = null;
+            return;
+        }
+        let node = '';
+        if (selectedNode.right != null && selectedNode.right.nodeBase == group) {
+            node = selectedNode.right;
+        } else {
+            node = selectedNode.left;
+        }
+        if (node.value == '+') {
+            console.log("+");
+            node.value = treeData.currNodeValue
+            node.nodeBase.children[1].innerHTML = treeData.currNodeValue++;
+            treeParent.appendChild(node.dest);
+            return;
+        }
+    }
+}
+
+function giveSelectedNode(group) {
+    nodes.forEach(level => {
+        level.forEach(node => {
+            if (node != null) {
+                node.nodeBase.classList.remove("selected");
+            }
+        })
+    })
+    removePlus();
+    group?.classList.add("selected");
     let selectedGroup = document.querySelector(".node-base.selected");
     if (selectedGroup == null) {
         selectedNode = null;
@@ -146,11 +202,28 @@ function handleNodeSelect() {
     let node = null;
     nodes.forEach(level => {
         level.forEach(n => {
-            if (n != null && n.nodeBase == selectedGroup) node = n;
+            if (n != null && n.nodeBase === selectedGroup) node = n;
         })
     });
     selectedNode = node;
+    editNodeInput.value = node.value;
+    return node;
+}
 
+function createPlus(level, parent, direction) {
+    let plusNode = createNewNode(level, "+", parent, new TreeNode("+"), direction);
+    let plusNodePath = plusNode.dest;
+    treeParent.removeChild(plusNodePath);
+}
+
+function removePlus() {
+    nodes.forEach(level => {
+        level.forEach(node => {
+            if (node != null && node.value == "+") {
+                deleteNode(node);
+            }
+        })
+    })
 }
 
 function deleteNode(node) {
@@ -168,23 +241,11 @@ function deleteNode(node) {
         }
     }
     treeParent.removeChild(node.nodeBase);
-    if (node.dest != null)
+    if (node.dest != null && treeParent.contains(node.dest))
         treeParent.removeChild(node.dest);
     nodes[node.level][node.index] = null;
-
     // if all the nodes in the level are deleted then delete the level
-    let isEmpty = true;
-    nodes[node.level].forEach(node => {
-        if (node != null) {
-            isEmpty = false;
-            return;
-        }
-    });
-
-    if (isEmpty) {
-        nodes.pop();
-        position.pop();
-    }
+    deleteLevel(node.level);
 }
 
 function addLevel(level) {
@@ -201,10 +262,31 @@ function addLevel(level) {
     }
 }
 
+function deleteLevel(level) {
+    let isEmpty = true;
+    nodes[level].forEach(node => {
+        if (node != null) {
+            isEmpty = false;
+            return;
+        }
+    });
+
+    if (isEmpty) {
+        nodes.pop();
+        position.pop();
+    }
+    if (nodes.length === 0) {
+        tree.root = null;
+        tree.insert(0);
+        treeData.currNodeValue = 1;
+    }
+}
+
 function reStructure() {
     let max = Math.pow(2, nodes.length - 1) - 1;
-    let gaps = [0, 200, 200, 100, 60, 60, 40, 3.125, 1.5625]
+    let gaps = [0, 200, 200, 100]
     let gap = gaps[nodes.length - 1];
+    if (gap < 60 || gap == null) gap = 60;
     if (nodes.length > 5) {
         treeData.nodeRadius = 20;
         nodes.forEach(level => {
