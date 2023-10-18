@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body::-webkit-scrollbar {
+  width: 0.5rem;
+
+  &-track {
+    background: #fff;
+  }
+
+  &-thumb {
+    background: #5e63f7;
+    border-radius: 0.5rem;
+  }
+
+  &-thumb:hover {
+    background: #3c40b2;
+  }
+
+  &-thumb:active {
+    background: #3c40b2;
+  }
+
+  &-corner {
+    background: #fff;
+  }
+}

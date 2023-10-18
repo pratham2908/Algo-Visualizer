@@ -1,0 +1,62 @@
+#tree {
+  display: flex;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: #3a3a3a;
+}
+#tree .node-base {
+  stroke: black;
+  stroke-width: 1px;
+  fill: white;
+  transition: all 0.2s;
+}
+#tree .node-base:hover {
+  stroke: #00dd00;
+  stroke-width: 4px;
+}
+#tree .node-base.selected {
+  stroke: #ff0000;
+  stroke-width: 4px;
+}
+#tree .node-path {
+  stroke: #00dd00;
+  stroke-width: 3px;
+  transition: all 0.3s;
+}
+
+.tree-taskbar {
+  position: absolute;
+  width: 100vw;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 10px;
+  padding-left: 50px;
+}
+.tree-taskbar button {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #3a3a3a;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.tree-taskbar button#delete-node-btn {
+  background-color: #ff0000;
+  box-shadow: 0 0 5px #ff0000;
+}
+.tree-taskbar button#delete-node-btn:hover {
+  background-color: #aa0000;
+  box-shadow: 0 0 5px #aa0000;
+}
+.tree-taskbar button#edit-node-btn {
+  background-color: #00dd00;
+  box-shadow: 0 0 5px #00dd00;
+}
+.tree-taskbar button#edit-node-btn:hover {
+  background-color: #00aa00;
+  box-shadow: 0 0 5px #00aa00;
+}/*# sourceMappingURL=Tree.css.map */
