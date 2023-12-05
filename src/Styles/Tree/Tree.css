@@ -54,55 +54,62 @@
   font-size: 1rem;
   cursor: pointer;
   transition: 0.2s;
+  box-shadow: 0 0 5px #000000;
+}
+.tree-taskbar button:hover {
+  box-shadow: 0 0 8px #000000;
+  background-color: #222;
+  color: white;
 }
 .tree-taskbar button#delete-node-btn {
   background-color: #ff0000;
-  box-shadow: 0 0 5px #ff0000;
+  color: white;
 }
 .tree-taskbar button#delete-node-btn:hover {
-  background-color: #aa0000;
-  box-shadow: 0 0 5px #aa0000;
+  background-color: #ff0000;
+  color: white;
 }
 .tree-taskbar button#change-value-btn {
   background-color: #00dd00;
-  box-shadow: 0 0 5px #00dd00;
+  color: white;
 }
 .tree-taskbar button#change-value-btn:hover {
-  background-color: #00aa00;
-  box-shadow: 0 0 5px #00aa00;
+  background-color: #00dd00;
+  color: white;
 }
 .tree-taskbar input#edit-node {
   margin: 10px;
   padding: 10px;
   border-radius: 5px;
-  width: 150px;
-  background-color: white;
+  border: none;
   color: black;
   font-size: 1rem;
   cursor: text;
   transition: 0.2s;
+  box-shadow: 0 0 5px #000000;
+}
+.tree-taskbar input#edit-node:focus {
+  outline: none;
+  box-shadow: 0 0 8px #000000;
 }
 
 #traversal-result {
   position: absolute;
-  top: 50px;
-  right: 100px;
-  max-width: 40px;
-  min-height: 30px;
+  top: 100px;
+  right: 200px;
+  text-align: center;
   border: 3px solid #0000ff;
   color: #0000ff;
   padding: 10px;
-  writing-mode: horizontal-tb;
-  text-orientation: mixed;
-  font: 700 2rem "Roboto";
+  font: 700 2rem "Roboto", sans-serif;
 }
 #traversal-result::before {
-  content: "Traversal Result:";
-  font: 700 2rem "Roboto";
-  writing-mode: horizontal-tb;
-  text-orientation: mixed;
+  content: "Traversal Order:";
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  text-wrap: nowrap;
   color: #000000;
 }/*# sourceMappingURL=Tree.css.map */
