@@ -4,7 +4,6 @@ import './Styles/App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Tree from "./Algorithms/Tree/Tree";
 import Array from "./Algorithms/Array/Array";
-import ValidSequence from "./Algorithms/Stack/ValidSequence";
 import Stack from "./Algorithms/Stack/Stack";
 function App() {
   return (

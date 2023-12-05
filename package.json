@@ -1,7 +1,7 @@
 {
   "name": "hello",
   "version": "0.1.0",
-  "homepage": "https://algo-vizualizer.netlify.app/",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
