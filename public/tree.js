@@ -178,9 +178,7 @@ deleteNodeBtn.addEventListener("click", () => {
     reStructure();
 });
 
-function changeTreePosition() {
-    treeParent.style.transform = `scale(${treeData.scale}) translate(${treeData.x / treeData.scale}px, ${treeData.y / treeData.scale}px)`;
-}
+
 
 function createNewNode(level, currValue, parentNode, currNode, direction = null) {
     if (!nodes[level]) addLevel(level);
@@ -446,6 +444,10 @@ clearTreeBtn.addEventListener("click", clearTree);
 initialize();
 function delayIt() {
     return new Promise(resolve => setTimeout(resolve, 1000));
+}
+
+function changeTreePosition() {
+    treeParent.style.transform = `scale(${treeData.scale}) translate(${treeData.x / treeData.scale}px, ${treeData.y / treeData.scale}px)`;
 }
 
 container.addEventListener("wheel", (e) => {
