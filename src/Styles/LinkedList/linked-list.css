@@ -9,7 +9,7 @@
   height: 100vh;
 }
 
-.node-base {
+.linked-list-node-base {
   stroke-width: 1px;
   transition: all 0.4s ease-in-out;
   cursor: pointer;
@@ -97,4 +97,4 @@
 #linked-list-controls button:hover {
   background-color: black;
   color: white;
-}/*# sourceMappingURL=linked-list.css.map */
+} /*# sourceMappingURL=linked-list.css.map */

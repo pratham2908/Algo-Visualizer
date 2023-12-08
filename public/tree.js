@@ -218,6 +218,7 @@ function createNewNode(level, currValue, parentNode, currNode, direction = null)
     text.innerHTML = currValue;
     group.appendChild(text);
     reStructure();
+    console.log(currNode);
     return currNode;
 }
 
@@ -441,14 +442,16 @@ function clearTree() {
 
 clearTreeBtn.addEventListener("click", clearTree);
 
+function changeTreePosition() {
+    treeParent.style.transform = `scale(${treeData.scale}) translate(${treeData.x / treeData.scale}px, ${treeData.y / treeData.scale}px)`;
+}
+
 initialize();
 function delayIt() {
     return new Promise(resolve => setTimeout(resolve, 1000));
 }
 
-function changeTreePosition() {
-    treeParent.style.transform = `scale(${treeData.scale}) translate(${treeData.x / treeData.scale}px, ${treeData.y / treeData.scale}px)`;
-}
+
 
 container.addEventListener("wheel", (e) => {
     if (e.deltaY < 0) {

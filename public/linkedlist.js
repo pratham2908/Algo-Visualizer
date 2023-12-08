@@ -201,7 +201,7 @@ async function createNodeBase(data, location = "end") {
     dataRect.classList.add("data-node");
     pointerRect.classList.add("pointer-node");
     containerRect.classList.add("container-node");
-    group.classList.add("node-base");
+    group.classList.add("linked-list-node-base");
 
     let x = location == "end" ? NodeDimensions.x : NodeDimensions.initialX;
     let y = location == "end" ? NodeDimensions.y : NodeDimensions.initialY;
@@ -363,7 +363,7 @@ deleteAtStartButton.addEventListener('click', async () => {
 });
 
 linkedListContainer.addEventListener('click', (e) => {
-    if (e.target.classList.contains("node-base") || e.target.parentNode.classList.contains("node-base")) return;
+    if (e.target.classList.contains("linked-list-node-base") || e.target.parentNode.classList.contains("linked-list-node-base")) return;
     for (let i of nodes) {
         i.nodeBase.classList.remove("selected");
     }
