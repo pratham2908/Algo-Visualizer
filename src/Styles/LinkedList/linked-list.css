@@ -16,8 +16,8 @@
   opacity: 0;
   transform: translate(0, -50px) scale(1);
 }
-.node-base .data-node,
-.node-base .pointer-node {
+.linked-list-node-base .data-node,
+.linked-list-node-base .pointer-node {
   stroke-width: 2px;
   stroke: red;
   fill: white;
@@ -25,10 +25,10 @@
   height: 70px;
   transition: all 0.3s ease-in-out;
 }
-.node-base .pointer-node {
+.linked-list-node-base .pointer-node {
   stroke: blue;
 }
-.node-base .container-node {
+.linked-list-node-base .container-node {
   stroke-width: 3px;
   stroke: black;
   fill: white;
@@ -36,26 +36,26 @@
   height: 110px;
   transition: all 0.3s ease-in-out;
 }
-.node-base .node-text,
-.node-base .address-text {
+.linked-list-node-base .node-text,
+.linked-list-node-base .address-text {
   text-anchor: middle;
   dominant-baseline: middle;
   font-size: 30px;
   transition: all 0.3s ease-in-out;
 }
-.node-base .address-text {
+.linked-list-node-base .address-text {
   font-size: 20px;
 }
-.node-base.appear {
+.linked-list-node-base.appear {
   opacity: 1;
   transform: translate(0, 0) scale(1);
 }
-.node-base.selected .container-node {
+.linked-list-node-base.selected .container-node {
   filter: drop-shadow(0px 0px 20px green);
   stroke: lightgreen;
   stroke-width: 5px;
 }
-.node-base.delete {
+.linked-list-node-base.delete {
   opacity: 0;
   transform: translate(0, -50px) scale(1);
 }
@@ -97,4 +97,4 @@
 #linked-list-controls button:hover {
   background-color: black;
   color: white;
-} /*# sourceMappingURL=linked-list.css.map */
+}/*# sourceMappingURL=linked-list.css.map */
