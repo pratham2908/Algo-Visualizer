@@ -12,16 +12,16 @@ body::-webkit-scrollbar {
   }
 
   &-thumb {
-    background: #5e63f7;
+    background: rgba(2, 151, 201, 0.75);
     border-radius: 0.5rem;
   }
 
   &-thumb:hover {
-    background: #3c40b2;
+    background: rgba(2, 151, 201, 1);
   }
 
   &-thumb:active {
-    background: #3c40b2;
+    background: rgba(2, 151, 201, 1);
   }
 
   &-corner {

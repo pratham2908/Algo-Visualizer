@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import AppendScript from "../../Components/AppendScript";
-import "../../Styles/Stack.css";
+import "../../Styles/Stack/Stack.css";
 
 
 const Stack = () => {

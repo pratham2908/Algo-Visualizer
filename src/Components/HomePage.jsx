@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 const HomePage = () => {
     useEffect(() => {
-        let arr = ['Array', 'Tree', 'Sorting Algorithms', 'Stack', 'Graph', 'Linked List', 'Dynamic Programming', 'Greedy Algorithm', 'Recursion & Backtracking', 'Bit Manipulation', 'Heap', 'Hashing', 'String', 'Matrix', 'Divide and Conquer', 'Advanced Algorithms'];
+        let arr = ['Array', 'Tree', 'Sorting Algorithms', 'Stack', 'Graph', 'Linked List', 'Matrix', 'Dynamic Programming', 'Greedy Algorithm', 'Recursion & Backtracking', 'Bit Manipulation', 'Heap', 'Hashing', 'String', 'Matrix', 'Divide and Conquer', 'Advanced Algorithms'];
 
         let container = document.getElementById('home-page-card-container');
         for (let i in arr) {
@@ -39,7 +39,7 @@ const HomePage = () => {
             <div id='home-page-header'>
                 <div className="title">
                     <h1 id='header-main-page'>Algorithm Visualizer</h1>
-                    <h3 id="header-tagline">Visualize the world</h3>
+                    <h2 id="header-tagline">Visualize the world</h2>
                 </div>
             </div>
             <div id='home-page-card-container'>
