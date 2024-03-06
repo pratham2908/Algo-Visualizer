@@ -1,6 +1,6 @@
-const matrixBox = document.querySelector('#matrix-parent');
-const width = matrixBox.clientWidth;
-const height = matrixBox.clientHeight;
+const matrixContainer = document.querySelector('#matrix-parent');
+const width = matrixContainer.clientWidth;
+const height = matrixContainer.clientHeight;
 const rows = Math.floor(height / 50);
 const columns = Math.floor(width / 50);
 const matrixNode = [];
@@ -18,7 +18,7 @@ startBfsBtn.addEventListener('click', startBfs);
 for (let i = 0; i < rows; i++) {
     const row = document.createElement('div');
     row.classList.add('matrix-row');
-    matrixBox.appendChild(row);
+    matrixContainer.appendChild(row);
     matrixNode.push([]);
     for (let j = 0; j < columns; j++) {
         const box = document.createElement('div');
@@ -30,11 +30,10 @@ for (let i = 0; i < rows; i++) {
     }
 }
 
-// adds obstacles in the matrix
-for (let i = 0; i < 20; i++) {
-    const row = Math.floor(Math.random() * rows);
-    const col = Math.floor(Math.random() * columns);
-    matrixNode[row][col].classList.add('obstacle');
+function toggleObstacle(e) {
+    const node = e.target;
+    if (node.classList.contains('source') || node.classList.contains('target')) return;
+    node.classList.toggle('obstacle');
 }
 
 async function bfs(startRow, startCol) {
@@ -77,35 +76,25 @@ function startBfs(e) {
     bfs(source.row, source.col);
 }
 
-function setTarget(e) {
-    const node = e.target;
-    const row = parseInt(node.getAttribute('row'));
-    const col = parseInt(node.getAttribute('col'));
-    if (node.classList.contains('obstacle')) return;
-    node.classList.add('target');
+function setTarget() {
+    let row = Math.floor(Math.random() * rows);
+    let col = Math.floor(Math.random() * columns);
+    let node = matrixNode[row][col];
     target = { row, col };
-
-    for (let i in matrixNode) {
-        for (let j in matrixNode[i]) {
-            matrixNode[i][j].removeEventListener('click', setTarget);
-            matrixNode[i][j].addEventListener('click', setSource);
-        }
-    }
+    node.classList.add('target');
 }
 
-function setSource(e) {
-    const node = e.target;
-    const row = parseInt(node.getAttribute('row'));
-    const col = parseInt(node.getAttribute('col'));
-    if (node.classList.contains('obstacle')) return;
-    node.classList.add('source');
-    source = { row, col };
-
-    for (let i in matrixNode) {
-        for (let j in matrixNode[i]) {
-            matrixNode[i][j].removeEventListener('click', setSource);
-        }
+function setSource() {
+    let row = Math.floor(Math.random() * rows);
+    let col = Math.floor(Math.random() * columns);
+    let node = matrixNode[row][col];
+    while (node.classList.contains('target')) {
+        row = Math.floor(Math.random() * rows);
+        col = Math.floor(Math.random() * columns);
+        node = matrixNode[row][col];
     }
+    source = { row, col };
+    node.classList.add('source');
 }
 
 async function findParent(row = target.row, col = target.col) {
@@ -114,7 +103,8 @@ async function findParent(row = target.row, col = target.col) {
         let parentNode = parent[idx];
         row = Math.floor(parentNode / columns);
         col = parentNode % columns;
-        if (row === source.row && col === source.col) break;
+        if (row === source.row && col === source.col || (row == -1 || col == -1)) break;
+        console.log(row, col);
         matrixNode[row][col].classList.add("path");
         pathLength++;
         pathLengthNode.innerHTML = `Shortest Path : ${pathLength}`;
@@ -123,10 +113,29 @@ async function findParent(row = target.row, col = target.col) {
     pathLengthNode.innerHTML = `Shortest Path : ${pathLength}`;
 }
 
+setTarget();
+setSource();
+
 
 for (let i in matrixNode) {
     for (let j in matrixNode[i]) {
-        matrixNode[i][j].addEventListener('click', setTarget);
+        matrixNode[i][j].addEventListener('click', toggleObstacle);
     }
 }
 
+
+matrixContainer.addEventListener('mousedown', (e) => {
+    startSelecting(e);
+    matrixContainer.addEventListener("mouseover", startSelecting);
+    matrixContainer.addEventListener("mouseup", () => {
+        matrixContainer.removeEventListener("mouseover", startSelecting);
+    });
+})
+
+function startSelecting(e) {
+    console.log(e.target);
+    if (e.target.classList.contains('matrix-box')) {
+        if (e.target.classList.contains('source') || e.target.classList.contains('target')) return;
+        e.target.classList.toggle('obstacle');
+    }
+}

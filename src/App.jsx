@@ -8,7 +8,14 @@ import Stack from "./Algorithms/Stack/Stack";
 import LinkedList from "./Algorithms/LinkedList/LinkedList";
 import Animation from "./Algorithms/LinkedList/Animation";
 import Matrix from "./Algorithms/Matrix/Matrix";
+import WorkInProgress from "./Components/WorkInProgress";
+import toast, { Toaster } from "react-hot-toast";
+import { useEffect } from "react";
+
 function App() {
+  useEffect(() => {
+    toast.success('Welcome to Algorithm Visualizer!')
+  }, [])
   return (
     <Router>
       <Routes>
@@ -19,8 +26,22 @@ function App() {
         <Route path="/linked-list" element={<LinkedList />} />
         <Route path="/linked-list/animation" element={<Animation />} />
         <Route path="/matrix" element={<Matrix />} />
+        <Route path="*" element={<WorkInProgress />}></Route>
       </Routes>
-    </Router>
+      <Toaster toastOptions={
+        {
+          style: {
+            fontSize: '1.4rem',
+            background: '#333',
+            color: '#fff',
+            minWidth: '400px',
+          },
+
+          position: 'top-right'
+        }
+
+      } />
+    </Router >
   );
 }
 

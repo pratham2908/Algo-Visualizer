@@ -52,7 +52,6 @@
 #matrix-container #matrix-parent .matrix-row .matrix-box {
   width: 50px;
   height: 50px;
-  border-radius: 5px;
   box-shadow: inset 0px 0px 2px 0px rgb(255, 0, 0);
   background-color: white;
   cursor: pointer;
@@ -76,19 +75,10 @@
   }
 }
 #matrix-container #matrix-parent .matrix-row .matrix-box.obstacle {
-  background-color: white;
   background-color: black;
   font-size: 2.5rem;
   cursor: default;
   position: relative;
-}
-#matrix-container #matrix-parent .matrix-row .matrix-box.obstacle::after {
-  content: "🚫";
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 #matrix-container #matrix-parent .matrix-row .matrix-box.target, #matrix-container #matrix-parent .matrix-row .matrix-box.source {
   font-size: 2rem;
@@ -107,5 +97,5 @@
   content: "🐀";
 }
 #matrix-container #matrix-parent .matrix-row .matrix-box.path {
-  background-color: green;
+  background-color: #ff8888;
 }/*# sourceMappingURL=matrix.css.map */

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 const HomePage = () => {
     useEffect(() => {
-        let arr = ['Array', 'Tree', 'Sorting Algorithms', 'Stack', 'Graph', 'Linked List', 'Matrix', 'Dynamic Programming', 'Greedy Algorithm', 'Recursion & Backtracking', 'Bit Manipulation', 'Heap', 'Hashing', 'String', 'Matrix', 'Divide and Conquer', 'Advanced Algorithms'];
+        let arr = ['Array', 'Tree', 'Sorting Algorithms', 'Stack', 'Graph', 'Linked List', 'Matrix', 'Dynamic Programming', 'Greedy Algorithm', 'Recursion & Backtracking', 'Bit Manipulation', 'Heap', 'Hashing', 'String', 'Divide and Conquer', 'Advanced Algorithms'];
 
         let container = document.getElementById('home-page-card-container');
         for (let i in arr) {
