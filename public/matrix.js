@@ -11,10 +11,10 @@ let pathLength = 1;
 for (let i = 0; i < rows * columns; i++) {
     parent.push(-1);
 }
+// pick audio file from local
 let startBfsBtn = document.querySelector('#bfs-start');
 let pathLengthNode = document.querySelector('#path-length');
 startBfsBtn.addEventListener('click', startBfs);
-// adds box in the matrix
 for (let i = 0; i < rows; i++) {
     const row = document.createElement('div');
     row.classList.add('matrix-row');
@@ -35,7 +35,7 @@ function toggleObstacle(e) {
     if (node.classList.contains('source') || node.classList.contains('target')) return;
     node.classList.toggle('obstacle');
 }
-
+let lastDone = 3;
 async function bfs(startRow, startCol) {
     const queue = [{ row: startRow, col: startCol }];
     const visited = new Set();
@@ -58,9 +58,19 @@ async function bfs(startRow, startCol) {
 
                 visited.add(newRow + ',' + newCol);
                 queue.push({ row: newRow, col: newCol });
-                if (!(newRow === target.row && newCol === target.col))
-                    matrixNode[newRow][newCol].classList.add('visited');
+                if (!(newRow === target.row && newCol === target.col)) {
+                    if (lastDone == 3) {
+                        let audio = new Audio("./bubble pop 2.mp3");
+                        audio.play();
+                        audio.volume = 0.2;
+                        // change sound effects
 
+                        lastDone = 1;
+                    } else {
+                        lastDone++;
+                    }
+                    matrixNode[newRow][newCol].classList.add('visited');
+                }
             }
         }
         await delayIt(100);
@@ -109,6 +119,8 @@ async function findParent(row = target.row, col = target.col) {
         pathLength++;
         pathLengthNode.innerHTML = `Shortest Path : ${pathLength}`;
         await delayIt(100);
+        let audio = new Audio("./bubble pop 2.mp3");
+        audio.play();
     }
     pathLengthNode.innerHTML = `Shortest Path : ${pathLength}`;
 }

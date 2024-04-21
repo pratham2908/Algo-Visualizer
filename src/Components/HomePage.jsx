@@ -12,7 +12,7 @@ const HomePage = () => {
             el.addEventListener('click', () => {
                 window.location.href = `/${arr[i].toLowerCase().replace(/ /g, '-')}`;
                 if (i == 2) window.location.href = "https://pratham2908.github.io/sorting-visualizer/";
-                if (i == 3) window.location.href = "https://d4t1r.csb.app/";
+                // if (i == 3) window.location.href = "https://d4t1r.csb.app/";
             })
         }
 
