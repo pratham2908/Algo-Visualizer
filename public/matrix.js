@@ -35,7 +35,11 @@ function toggleObstacle(e) {
     if (node.classList.contains('source') || node.classList.contains('target')) return;
     node.classList.toggle('obstacle');
 }
-let lastDone = 3;
+let sounds = [];
+let currSound = 0;
+for (let i = 0; i < 10; i++) {
+    sounds.push(new Audio(`./bubble pop 2.mp3`));
+}
 async function bfs(startRow, startCol) {
     const queue = [{ row: startRow, col: startCol }];
     const visited = new Set();
@@ -59,17 +63,11 @@ async function bfs(startRow, startCol) {
                 visited.add(newRow + ',' + newCol);
                 queue.push({ row: newRow, col: newCol });
                 if (!(newRow === target.row && newCol === target.col)) {
-                    if (lastDone == 3) {
-                        let audio = new Audio("./bubble pop 2.mp3");
-                        audio.play();
-                        audio.volume = 0.2;
-                        // change sound effects
-
-                        lastDone = 1;
-                    } else {
-                        lastDone++;
-                    }
                     matrixNode[newRow][newCol].classList.add('visited');
+                    sounds[currSound].currentTime = 0;
+                    sounds[currSound].play();
+                    sounds[currSound].volume = 0.1;
+                    currSound = (currSound + 1) % 6;
                 }
             }
         }
