@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 const HomePage = () => {
     useEffect(() => {
-        let arr = ['Array', 'Tree', 'Sorting Algorithms', 'Stack', 'Graph', 'Linked List', 'Matrix', 'Dynamic Programming', 'Greedy Algorithm', 'Recursion & Backtracking', 'Bit Manipulation', 'Heap', 'Hashing', 'String', 'Divide and Conquer', 'Advanced Algorithms'];
+        let arr = ['Array', 'Tree', 'Sorting Algorithms', 'Stack', 'Queue', 'Graph', 'Linked List', 'Matrix', 'Dynamic Programming', 'Greedy Algorithm', 'Recursion & Backtracking', 'Bit Manipulation', 'Heap', 'Hashing', 'String', 'Divide and Conquer', 'Advanced Algorithms'];
 
         let container = document.getElementById('home-page-card-container');
         for (let i in arr) {
@@ -11,7 +11,7 @@ const HomePage = () => {
             container.appendChild(el);
             el.addEventListener('click', () => {
                 window.location.href = `/${arr[i].toLowerCase().replace(/ /g, '-')}`;
-                if (i == 2) window.location.href = "https://pratham2908.github.io/sorting-visualizer/";
+                if (i === 2) window.location.href = "https://pratham2908.github.io/sorting-visualizer/";
                 // if (i == 3) window.location.href = "https://d4t1r.csb.app/";
             })
         }
