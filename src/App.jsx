@@ -11,6 +11,7 @@ import Matrix from "./Algorithms/Matrix/Matrix";
 import WorkInProgress from "./Components/WorkInProgress";
 import toast, { Toaster } from "react-hot-toast";
 import { useEffect } from "react";
+import Queue from "./Algorithms/Queue/Queue";
 
 function App() {
   useEffect(() => {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/tree" element={<Tree />} />
         <Route path="/array/*" element={<Array />} />
         <Route path="/stack" element={<Stack />} />
+        <Route path="/queue" element={<Queue />} />
         <Route path="/linked-list" element={<LinkedList />} />
         <Route path="/linked-list/animation" element={<Animation />} />
         <Route path="/matrix" element={<Matrix />} />
